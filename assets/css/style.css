@@ -367,11 +367,11 @@ h1, h2, h3 {
 }
 
 .member-grid--leadership {
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
 }
 
 .member-grid--members {
-  grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(196px, 100%), 1fr));
   gap: 18px;
   margin-top: 18px;
 }
@@ -471,7 +471,9 @@ h1, h2, h3 {
 }
 
 .member--compact .member__photo {
-  width: 100%;
+  width: auto;
+  align-self: stretch;
+  aspect-ratio: 1 / 1;
   border: 0;
   border-bottom: 1px solid var(--border);
   border-radius: 0;
@@ -637,6 +639,49 @@ h1, h2, h3 {
 @media (max-width: 620px) {
   .card-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* 窄屏下主席/负责人（横版）卡片收紧一些，照片和文字都不至于挤成一团 */
+  .member:not(.member--compact) {
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .member:not(.member--compact) .member__photo {
+    width: 84px;
+  }
+
+  .member__name {
+    font-size: 16.5px;
+  }
+
+  .member__bio {
+    font-size: 13.5px;
+  }
+
+  /* 工作室成员卡片在手机上排两列，别一张占满整行 */
+  .member-grid--members {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .member--compact .member__info {
+    padding: 12px 12px 14px;
+  }
+
+  .member--compact .member__name {
+    font-size: 15.5px;
+  }
+
+  .member--compact .member__role {
+    margin: 5px 0 8px;
+    padding: 2px 8px;
+    font-size: 11.5px;
+  }
+
+  .member--compact .member__bio {
+    font-size: 12.5px;
+    line-height: 1.6;
   }
 
   .site-header__inner {
